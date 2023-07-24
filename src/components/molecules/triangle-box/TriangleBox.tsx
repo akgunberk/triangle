@@ -17,9 +17,9 @@ export function TriangleBox() {
   return (
     <div className="w-screen h-screen grid place-content-center">
       <svg
-        viewBox={`0 0 ${DEFAULT_CANVAS_SIZE} ${DEFAULT_CANVAS_SIZE}`}
+        viewBox="0 0 300 300"
         xmlns="http://www.w3.org/2000/svg"
-        className={`w-[${DEFAULT_CANVAS_SIZE}px] h-[${DEFAULT_CANVAS_SIZE}px] border-2 border-dark-grey rounded-md`}
+        className="w-[300px] h-[300px] border-2 border-dark-grey rounded-md"
       >
         <DraggableCircle
           radius={CIRCLE_RADIUS}
