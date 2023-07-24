@@ -2,36 +2,24 @@ import useTriangle from "../../../hooks/useTriangle";
 import { DraggableCircle, Triangle } from "../../atoms";
 
 import type { TrianglePosition } from "../../../hooks";
-import { useMemo } from "react";
 import { CIRCLE_RADIUS, DEFAULT_CANVAS_SIZE } from "./triangeBoxConstants";
 
-export type TriangleBoxProps = {
-  boxSize?: number;
-  gridNumber?: number;
-};
+const GRID_SIZE = DEFAULT_CANVAS_SIZE / 6;
+const INITIAL_POSITION: TrianglePosition = [
+  [DEFAULT_CANVAS_SIZE / 2, GRID_SIZE],
+  [GRID_SIZE, DEFAULT_CANVAS_SIZE - GRID_SIZE],
+  [DEFAULT_CANVAS_SIZE - GRID_SIZE, DEFAULT_CANVAS_SIZE - GRID_SIZE],
+];
 
-export function TriangleBox({
-  boxSize = DEFAULT_CANVAS_SIZE,
-  gridNumber = 6,
-}: TriangleBoxProps) {
-  const computedInitialPosition = useMemo(() => {
-    const gridSize = boxSize / gridNumber;
-    const initialPosition: TrianglePosition = [
-      [boxSize / 2, gridSize],
-      [gridSize, boxSize - gridSize],
-      [boxSize - gridSize, boxSize - gridSize],
-    ];
-
-    return initialPosition;
-  }, [boxSize, gridNumber]);
-  const [[A, B, C], pointSetter] = useTriangle(computedInitialPosition);
+export function TriangleBox() {
+  const [[A, B, C], pointSetter] = useTriangle(INITIAL_POSITION);
 
   return (
     <div className="w-screen h-screen grid place-content-center">
       <svg
-        viewBox={`0 0 ${boxSize} ${boxSize}`}
+        viewBox={`0 0 ${DEFAULT_CANVAS_SIZE} ${DEFAULT_CANVAS_SIZE}`}
         xmlns="http://www.w3.org/2000/svg"
-        className={`w-[${boxSize}px] h-[${boxSize}px] border-2 border-dark-grey rounded-md`}
+        className={`w-[${DEFAULT_CANVAS_SIZE}px] h-[${DEFAULT_CANVAS_SIZE}px] border-2 border-dark-grey rounded-md`}
       >
         <DraggableCircle
           radius={CIRCLE_RADIUS}
